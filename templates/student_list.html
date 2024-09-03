@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Student List</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles.css') }}"
+    />
+    <style>
+      body {
+        margin: 20px;
+      }
+      h1 {
+        color: black;
+        text-align: center;
+      }
+      table tr th {
+        background-color: aquamarine;
+        color: black;
+        font-size: 20px;
+        border: 2px solid black;
+      }
+      table tr td {
+        border: 2px solid black;
+      }
+      .button {
+        text-align: center;
+        margin-top: 20px;
+      }
+      .back-button {
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: white;
+        text-decoration: none;
+        font-size: 16px;
+        border-radius: 5px;
+        transition: background-color 0.3s, color 0.3s;
+      }
+      .back-button:hover {
+        background-color: aqua;
+        color: rgb(67, 67, 67);
+      }
+      nav ul li {
+        display: inline;
+        margin-right: 10px;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      table,
+      th,
+      td {
+        padding: 8px;
+      }
+
+      a {
+        text-decoration: none;
+        color: #007bff;
+      }
+      table td {
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Student List</h1>
+    <table border="1">
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Age</th>
+        <th>Actions</th>
+      </tr>
+      {% for student in students %}
+      <tr>
+        <td>{{ student.id }}</td>
+        <td>{{ student.name }}</td>
+        <td>{{ student.age }}</td>
+        <td>
+          <a href="{{ url_for('update_student_form', student_id=student.id) }}"
+            >Edit</a
+          >
+          |
+          <a href="{{ url_for('delete_student', student_id=student.id) }}"
+            >Delete</a
+          >
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
+    <br />
+    <div class="button">
+      <a href="{{ url_for('index') }}" class="back-button">Back to Home</a>
+    </div>
+  </body>
+</html>
